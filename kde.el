@@ -76,7 +76,9 @@
     (kde-kmail-send-region (region-beginning) (region-end)))
    ((org-get-heading)
     (kde-kmail-send-org-entry))
-   ((string-match "\\.pdf\\'" buffer-file-name)
+   ((string-match "\\.csv\\'" buffer-file-name)
+    (kde-kmail-send-attachment))
+   ((eq buffer-file-coding-system 'no-conversion)
     (kde-kmail-send-attachment))
    (t (kde-kmail-send-file))))
 
