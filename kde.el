@@ -49,25 +49,36 @@
 (defun kde-kmail-send-file ()
   "Send current file."
   (interactive)
-  (kde-kmail-compose nil nil nil (buffer-file-name)))
+  (kde-kmail-compose nil nil nil buffer-file-name))
 
 ;;;###autoload
 (defun kde-kmail-send-attachment ()
   "Send current file as attachment."
   (interactive)
-  (kde-kmail-compose nil nil (buffer-file-name)))
+  (kde-kmail-compose nil nil buffer-file-name))
 
-;;;###autoload
 (defun kde-kmail-send-region (start end)
   "Send current region."
   (interactive "r")
   (kde-kmail-compose (buffer-substring-no-properties start end)))
 
-;;;###autoload
 (defun kde-kmail-send-org-entry ()
   "Send current org entry as text."
   (interactive)
   (kde-kmail-compose (org-get-entry) (org-get-heading t t)))
+
+;;;###autoload
+(defun kde-kmail-send-default ()
+  "Default send mode."
+  (interactive)
+  (cond
+   ((region-active-p)
+    (kde-kmail-send-region (region-beginning) (region-end)))
+   ((org-get-heading)
+    (kde-kmail-send-org-entry))
+   ((string-match "\\.pdf\\'" buffer-file-name)
+    (kde-kmail-send-attachment))
+   (t (kde-kmail-send-file))))
 
 (defun kde--org-scheduled-or-deadline ()
   "Return scheduled or deadline time from current point in order of priority"
