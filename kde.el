@@ -89,8 +89,8 @@
                                 "-t" time
                                 message))
             (message (concat "Alarm set for : " message))
-          (display-warning :error "Error in setting alarm"))
-      (display-warning :error "Error in parsing entry"))))
+          (message "Error in setting alarm"))
+      (message "Error in parsing entry"))))
 
 ;;;###autoload
 (defun kde-explore ()
