@@ -1,0 +1,3 @@
+#+TITLE: kde.el
+
+Simple functions to interact with KDE applications from Emacs.
