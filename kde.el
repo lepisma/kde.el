@@ -111,6 +111,14 @@
   (interactive)
   (start-process-shell-command "kde-explore" nil "dolphin ."))
 
+;;;###autoload
+(defun kde-konsole ()
+  "Open konsole in current directory."
+  (interactive)
+  (start-process "kde-konsole" nil
+                 "konsole"
+                 "--workdir" default-directory))
+
 (provide 'kde)
 
 ;;; kde.el ends here
